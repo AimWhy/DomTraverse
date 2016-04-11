@@ -82,7 +82,7 @@ function getPrevNodeByLever(node) {
 
         while (index < result.length) {
             currentNode = result[index];
-            if (node === currentNode) {
+            if (node.parentNode === currentNode) {
                 return result.pop();
             }
 
@@ -106,7 +106,7 @@ function getNextNodeByLever(node) {
 
         while (index < result.length) {
             currentNode = result[index];
-            if (node === currentNode) {
+            if (node.parentNode === currentNode) {
                 _index = result.length;
             }
 
