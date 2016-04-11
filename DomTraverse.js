@@ -70,3 +70,55 @@ var DomTraverse = {
         return leaf;
     }
 };
+
+function getPrevNodeByLever(node) {
+    if (node.previousSibling) {
+        return node.previousSibling;
+    } else {
+        var result = [document.documentElement],
+            currentNode,
+            childNodes,
+            index = 0;
+
+        while (index < result.length) {
+            currentNode = result[index];
+            if (node === currentNode) {
+                return result.pop();
+            }
+
+            childNodes = currentNode.childNodes;
+            [].push.apply(result, childNodes);
+            index++;
+        }
+        return undefined;
+    }
+}
+
+function getNextNodeByLever(node) {
+    if (node.nextSibling) {
+        return node.nextSibling;
+    } else {
+        var result = [document.documentElement],
+            currentNode,
+            childNodes,
+            index = 0,
+            _index = Infinity;
+
+        while (index < result.length) {
+            currentNode = result[index];
+            if (node === currentNode) {
+                _index = result.length;
+            }
+
+            childNodes = currentNode.childNodes;
+            [].push.apply(result, childNodes);
+            index++;
+
+            if (result.length > _index) {
+                break;
+            }
+        }
+
+        return result[_index];
+    }
+}
