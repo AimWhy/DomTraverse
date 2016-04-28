@@ -122,3 +122,24 @@ function getNextNodeByLever(node) {
         return result[_index];
     }
 }
+
+function getAllNodesByLevel() {
+	var levelMap = [[document.documentElement]],
+	level = 0;
+	while (level < levelMap.length) {
+		var curLevel = levelMap[level],
+		nextLevel = [];
+
+		for (var j = 0, l = curLevel.length; j < l; j++) {
+			Array.prototype.push.apply(nextLevel, curLevel[j].childNodes)
+		}
+
+		if (nextLevel.length) {
+			levelMap.push(nextLevel);
+		}
+
+		level++
+	}
+
+	return levelMap;
+}
